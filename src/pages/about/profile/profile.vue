@@ -1,0 +1,142 @@
+<template>
+    <Card title="公司资料" icon="layui-icon-fonts-code" @icon-click="showDoc('富文本', 'editor')">
+        <div class="layui-btn-container">
+            <button class="layui-btn" @click="switchLang()">切换中英文</button>
+            <button class="layui-btn" @click="getAllHtml()">获取整个html的内容</button>
+            <button class="layui-btn" @click="getContent()">获取html的内容</button>
+            <button class="layui-btn" @click="setContent()">写入内容</button>
+            <button class="layui-btn" @click="addContent()">追加内容</button>
+            <button class="layui-btn" @click="getContentTxt()">获得纯文本</button>
+            <button class="layui-btn" @click="getPlainTxt()">获得带格式的纯文本</button>
+            <button class="layui-btn" @click="hasContent()">判断是否有内容</button>
+            <button class="layui-btn" @click="setFocus()">使编辑器获取焦点</button>
+            <button class="layui-btn" @click="getText()">获得当前选中文本</button>
+            <button class="layui-btn" @click="insertHtml()">插入给定html的内容</button>
+            <button class="layui-btn" @click="setEnabled()">可以编辑</button>
+            <button class="layui-btn" @click="setDisabled()">不可编辑</button>
+            <button class="layui-btn" @click="setHide()">隐藏编辑器</button>
+            <button class="layui-btn" @click="setShow()">显示编辑器</button>
+            <button class="layui-btn" @click="setHeight()">设置编辑器高度为500</button>
+            <button class="layui-btn" @mousedown="isFocus()">编辑器是否获得焦点</button>
+            <button class="layui-btn" @mousedown="setBlur()">编辑器失去焦点</button>
+            <button class="layui-btn" @click="getLocalData()">获取草稿箱内容</button>
+            <button class="layui-btn" @click="clearLocalData()">清空草稿箱</button>
+        </div>
+
+        <Editor ref="editor" @ready="ueditorReady"></Editor>
+    </Card>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                instance: null,
+                isZH: true
+            };
+        },
+        methods: {
+            ueditorReady(instance) {
+                this.instance = instance;
+            },
+
+            switchLang() {
+                this.isZH = !this.isZH;
+                this.$refs.editor.switchLang(this.isZH ? 'zh-cn' : 'en');
+            },
+
+            getAllHtml() {
+                let html = this.instance.getAllHtml();
+                alert(html);
+            },
+
+            getContent() {
+                let content = this.instance.getContent();
+                alert(content);
+            },
+
+            setContent() {
+                this.instance.setContent('欢迎使用layui和ueditor');
+            },
+
+            addContent() {
+                this.instance.setContent('欢迎使用layui和ueditor', true);
+            },
+
+            setDisabled() {
+                this.instance.setDisabled('fullscreen');
+            },
+
+            setEnabled() {
+                this.instance.setEnabled();
+            },
+
+            getText() {
+                // 当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
+                let range = this.instance.selection.getRange();
+                range.select();
+                let txt = this.instance.selection.getText();
+                this.$layer.alert(txt);
+            },
+
+            getContentTxt() {
+                this.$layer.alert(this.instance.getContentTxt());
+            },
+
+            hasContent() {
+                this.$layer.msg(this.instance.hasContents());
+            },
+
+            setFocus() {
+                this.instance.focus();
+            },
+
+            isFocus() {
+                this.$layer.msg(String(this.instance.isFocus()));
+                window.UE.dom.domUtils.preventDefault(event);
+            },
+
+            setBlur() {
+                this.instance.blur();
+                window.UE.dom.domUtils.preventDefault(event);
+            },
+
+            setHide() {
+                this.instance.setHide();
+            },
+
+            setShow() {
+                this.instance.setShow();
+            },
+
+            setHeight() {
+                this.instance.setHeight(500);
+            },
+
+            getLocalData() {
+                alert(this.instance.execCommand('getlocaldata'));
+            },
+
+            clearLocalData() {
+                this.instance.execCommand('clearlocaldata');
+            },
+
+            getPlainTxt() {
+                alert(this.instance.getPlainTxt());
+            },
+
+            insertHtml() {
+                this.instance.execCommand('insertHtml', '<p>插入指定html内容</p>');
+            },
+
+            showDoc(name, target) {
+                this.$layer.open({
+                    title: name,
+                    type: 2,
+                    area: ['100%', '100%'],
+                    content: `/static/doc/editor/${target}.html`
+                });
+            }
+        }
+    };
+</script>
