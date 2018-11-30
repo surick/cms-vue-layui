@@ -15,6 +15,7 @@ import Contact from '@/pages/contact/contact';
 
 import Product from '@/pages/product/product';
 import ProductList from '@/pages/product/list/list';
+import ProductAdd from '@/pages/product/list/productAdd';
 import ProductParentCategory from '@/pages/product/category/parent';
 import ProductChildCategory from '@/pages/product/category/child';
 import ParentAdd from '@/pages/product/category/parentAdd';
@@ -46,6 +47,13 @@ export const otherRouter = [
         title: '子类别添加',
         path: '/product/category/childAdd',
         component: ChildAdd
+    },
+
+    {
+        name: 'productAdd',
+        title: '产品增加',
+        path: '/product/list/productAdd',
+        component: ProductAdd
     },
 
     {

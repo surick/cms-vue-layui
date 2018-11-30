@@ -3,10 +3,8 @@
         <div class="demoTable">
             <button class="layui-btn" @click="add()">添加</button>
         </div>
-        </br>
         <Table :options="options" @table-toolbar-event="toolbarEvent" @table-bar-event="barEvent" @table-checkbox-event="checkboxEvent">
             <div mref="bar">
-                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
             </div>
@@ -19,12 +17,8 @@
         data() {
             return {
                 options: {
-                    url: '/static/data/demo1.json',
+                    url: 'http://127.0.0.1:8989/cms/products/getAllProducts?tokenAuthorization=' + localStorage.token,
                     cols: [[
-                        {
-                            type: 'checkbox',
-                            fixed: 'left'
-                        },
 
                         {
                             field: 'id',
@@ -33,26 +27,39 @@
                         },
 
                         {
-                            field: 'username',
+                            field: 'name',
                             title: '产品名',
                             edit: 'text'
                         },
 
                         {
-                            field: 'sex',
-                            title: '类别',
-                            edit: 'text',
-                            sort: true
+                            field: 'cnName',
+                            title: '中文产品名',
+                            edit: 'text'
                         },
 
                         {
-                            field: 'city',
+                            field: 'content',
                             title: '介绍'
                         },
 
                         {
-                            field: 'url',
-                            title: '产品图'
+                            field: 'cnContent',
+                            title: '中文介绍'
+                        },
+
+                        {
+                            field: 'childTypeId',
+                            title: '类别',
+                            sort: true
+                        },
+
+                        {
+                            field: 'imgUrl',
+                            title: '产品图',
+                            templet: (res) => {
+                                return `<img src="http://127.0.0.1/${res.imgUrl}" />`;
+                            }
                         },
 
                         {
@@ -98,6 +105,11 @@
 
             checkboxEvent(obj) {
                 this.$layer.msg('checkbox变化行：' + obj.data.id);
+            },
+
+            add() {
+                this.$router.push('/product/list/productAdd');
+                // this.$layer.open({ title: '添加父类别', type: 2, content: '/login', area: ['80%', '50%'] });
             }
         }
     };

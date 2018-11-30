@@ -3,7 +3,7 @@
         <div class="demoTable">
             <button class="layui-btn" @click="add()">添加</button>
         </div>
-        </br>
+        
         <Table :options="options" @table-toolbar-event="toolbarEvent" @table-bar-event="barEvent" @table-checkbox-event="checkboxEvent">
             <div mref="bar">
                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -14,11 +14,12 @@
 </template>
 
 <script>
+    import Category from '@/http/category.js';
     export default {
         data() {
             return {
                 options: {
-                    url: '/static/data/demo1.json',
+                    url: 'http://127.0.0.1:8989/cms/productType/getAllChildTypes?tokenAuthorization=' + localStorage.token,
                     cols: [[
 
                         {
@@ -28,19 +29,19 @@
                         },
 
                         {
-                            field: 'username',
+                            field: 'childName',
                             title: '名称',
                             edit: 'text'
                         },
 
                         {
-                            field: 'username',
+                            field: 'cnChildName',
                             title: '中文名称',
                             edit: 'text'
                         },
 
                         {
-                            field: 'sex',
+                            field: 'parentId',
                             title: '父类别',
                             edit: 'text',
                             sort: true
@@ -78,12 +79,22 @@
                 if (obj.event === 'detail') {
                     this.$layer.msg('ID：' + data.id + ' 的查看操作');
                 } else if (obj.event === 'del') {
-                    this.$layer.confirm('真的删除行么', (index) => {
-                        obj.del();
-                        this.$layer.close(index);
+                    this.$layer.confirm('真的删除么', (index) => {
+                        Category.deleteChildType(this, data.id).then((res) => {
+                            if (res.success) {
+                                obj.del();
+                                this.$layer.msg('删除成功');
+                                this.$layer.close(index);
+                            }
+                        });
                     });
                 } else if (obj.event === 'edit') {
-                    this.$layer.alert('编辑行：<br>' + JSON.stringify(data));
+                    Category.updateChildType(this, data.id, data).then(res => {
+                        if (res.success) {
+                            this.$layer.msg('修改成功');
+                            this.$router.push('/product/category/child');
+                        }
+                    });
                 }
             },
 

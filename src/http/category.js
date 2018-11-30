@@ -17,8 +17,6 @@ export default {
                 url: '/cms/productType/getAllParentTypes'
             }).then(res => {
                 if (res.success) {
-                    res.data.list.forEach(item => {
-                    });
                     resolve(res);
                 }
             });
@@ -39,6 +37,46 @@ export default {
         return ajax(vm, {
             method: 'DELETE',
             url: '/cms/productType/removeParentType/' + id
+        });
+    },
+    saveChildType(vm, obj) {
+        return ajax(vm, {
+            method: 'POST',
+            url: '/cms/productType/saveChildType',
+            data: {
+                parentId: obj.parent,
+                childName: obj.childName,
+                cnChildName: obj.cnChildName
+            }
+        });
+    },
+    updateChildType(vm, id, obj) {
+        return ajax(vm, {
+            method: 'POST',
+            url: '/cms/productType/updateChildType',
+            data: {
+                id: id,
+                childName: obj.childName,
+                cnChildName: obj.cnChildName
+            }
+        });
+    },
+    deleteChildType(vm, id) {
+        return ajax(vm, {
+            method: 'DELETE',
+            url: '/cms/productType/removeChildType/' + id
+        });
+    },
+    getAllChildTypes(vm, obj) {
+        return new Promise((resolve, reject) => {
+            ajax(vm, {
+                method: 'GET',
+                url: '/cms/productType/getAllChildTypes'
+            }).then(res => {
+                if (res.success) {
+                    resolve(res);
+                }
+            });
         });
     }
 };

@@ -10,16 +10,20 @@ const http = axios.create({
 
 const ajax = (vm, request) => {
     return new Promise((resolve, reject) => {
-        request.headers = { tokenAuthorization: localStorage.token || '' };
+        let headers = request.headers || {};
+        request.headers = { ...headers, tokenAuthorization: localStorage.token || '' };
         http(request)
             .then(res => {
                 switch (res.data.code) {
+                case 0:
+                    resolve(res.data);
+                    break;
                 case 200:
                     if (res.data.message) {
                         if (res.data.success) {
-                            vm && vm.$layer.msg(res.data.message);
+                            vm && vm.$layer.msg('成功');
                         } else {
-                            vm && vm.$layer.msg(res.data.message);
+                            vm && vm.$layer.msg('失败');
                         }
                     }
                     resolve(res.data);
@@ -42,7 +46,7 @@ const ajax = (vm, request) => {
                     });
                     break;
                 default:
-                    vm && vm.$layer.msg(res.data.message);
+                    vm && vm.$layer.msg('失败');
                 }
             })
             .catch((err) => {

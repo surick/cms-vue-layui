@@ -3,7 +3,7 @@
         <div class="demoTable">
             <button class="layui-btn" @click="add()">添加</button>
         </div>
-        </br>
+        
         <Table :options="options" @table-toolbar-event="toolbarEvent" @table-bar-event="barEvent" @table-checkbox-event="checkboxEvent">
             <div mref="bar">
                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
