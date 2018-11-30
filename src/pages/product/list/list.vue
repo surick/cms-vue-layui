@@ -1,5 +1,6 @@
 <template>
-    <Card title="产品列表">
+<div>
+    <Card title="产品列表" >
         <div class="demoTable">
             <button class="layui-btn" @click="add()">添加</button>
         </div>
@@ -10,9 +11,11 @@
             </div>
         </Table>
     </Card>
+</div>
 </template>
 
 <script>
+    import Product from '@/http/product.js';
     export default {
         data() {
             return {
@@ -40,12 +43,14 @@
 
                         {
                             field: 'content',
-                            title: '介绍'
+                            title: '介绍',
+                            edit: 'text'
                         },
 
                         {
                             field: 'cnContent',
-                            title: '中文介绍'
+                            title: '中文介绍',
+                            edit: 'text'
                         },
 
                         {
@@ -94,12 +99,22 @@
                 if (obj.event === 'detail') {
                     this.$layer.msg('ID：' + data.id + ' 的查看操作');
                 } else if (obj.event === 'del') {
-                    this.$layer.confirm('真的删除行么', (index) => {
-                        obj.del();
-                        this.$layer.close(index);
+                    this.$layer.confirm('真的删除么', (index) => {
+                        Product.deleteProduct(this, data.id).then((res) => {
+                            if (res.success) {
+                                obj.del();
+                                this.$layer.msg('删除成功');
+                                this.$layer.close(index);
+                            }
+                        });
                     });
                 } else if (obj.event === 'edit') {
-                    this.$layer.alert('编辑行：<br>' + JSON.stringify(data));
+                    Product.updateProduct(this, data.id, data).then(res => {
+                        if (res.success) {
+                            this.$layer.msg('修改成功');
+                            this.$router.push('/product/list');
+                        }
+                    });
                 }
             },
 
@@ -114,3 +129,4 @@
         }
     };
 </script>
+

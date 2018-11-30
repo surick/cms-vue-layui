@@ -10,7 +10,6 @@
             </div>
 
             <div mref="bar">
-                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
             </div>
@@ -24,53 +23,43 @@
             return {
                 options: {
                     url: '/static/data/demo1.json',
-                    toolbarDom: 'toolbar',
-                    defaultToolbar: [],
                     cols: [[
-                        {
-                            type: 'checkbox',
-                            fixed: 'left'
-                        },
 
                         {
                             field: 'id',
                             title: 'ID',
-                            width: 80,
                             fixed: 'left'
                         },
 
                         {
                             field: 'username',
-                            title: '用户名',
-                            width: 120,
+                            title: '标题',
                             edit: 'text'
                         },
 
                         {
-                            field: 'sex',
-                            title: '性别',
-                            width: 80,
-                            edit: 'text',
-                            sort: true
-                        },
-
-                        {
                             field: 'city',
-                            title: '城市',
-                            width: 100
+                            title: '联系方式'
                         },
 
                         {
                             field: 'sign',
-                            title: '签名'
+                            title: '公司名'
                         },
 
                         {
                             field: 'experience',
-                            title: '积分',
-                            width: 80,
-                            sort: true,
-                            totalRow: true
+                            title: '内容'
+                        },
+
+                        {
+                            field: 'sign',
+                            title: '地区'
+                        },
+
+                        {
+                            field: 'sign',
+                            title: '地址'
                         },
 
                         {

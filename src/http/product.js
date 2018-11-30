@@ -24,33 +24,23 @@ export default {
             data: obj
         });
     },
-    updateChildType(vm, id, obj) {
+    updateProduct(vm, id, obj) {
         return ajax(vm, {
             method: 'POST',
-            url: '/cms/productType/updateChildType',
+            url: '/cms/products/updateProducts',
             data: {
                 id: id,
-                childName: obj.childName,
-                cnChildName: obj.cnChildName
+                name: obj.name,
+                cnName: obj.cnName,
+                content: obj.content,
+                cnContent: obj.cnContent
             }
         });
     },
-    deleteChildType(vm, id) {
+    deleteProduct(vm, id) {
         return ajax(vm, {
             method: 'DELETE',
-            url: '/cms/productType/removeChildType/' + id
-        });
-    },
-    getAllChildTypes(vm, obj) {
-        return new Promise((resolve, reject) => {
-            ajax(vm, {
-                method: 'GET',
-                url: '/cms/productType/getAllChildTypes'
-            }).then(res => {
-                if (res.success) {
-                    resolve(res);
-                }
-            });
+            url: '/cms/products/removeProducts/' + id
         });
     }
 };
