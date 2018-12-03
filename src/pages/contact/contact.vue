@@ -1,33 +1,15 @@
 <template>
     <Card title="联系我们" icon="layui-icon-fonts-code" @icon-click="showDoc('富文本', 'editor')">
         <div class="layui-btn-container">
-            <button class="layui-btn" @click="switchLang()">切换中英文</button>
-            <button class="layui-btn" @click="getAllHtml()">获取整个html的内容</button>
-            <button class="layui-btn" @click="getContent()">获取html的内容</button>
-            <button class="layui-btn" @click="setContent()">写入内容</button>
-            <button class="layui-btn" @click="addContent()">追加内容</button>
-            <button class="layui-btn" @click="getContentTxt()">获得纯文本</button>
-            <button class="layui-btn" @click="getPlainTxt()">获得带格式的纯文本</button>
-            <button class="layui-btn" @click="hasContent()">判断是否有内容</button>
-            <button class="layui-btn" @click="setFocus()">使编辑器获取焦点</button>
-            <button class="layui-btn" @click="getText()">获得当前选中文本</button>
-            <button class="layui-btn" @click="insertHtml()">插入给定html的内容</button>
-            <button class="layui-btn" @click="setEnabled()">可以编辑</button>
-            <button class="layui-btn" @click="setDisabled()">不可编辑</button>
-            <button class="layui-btn" @click="setHide()">隐藏编辑器</button>
-            <button class="layui-btn" @click="setShow()">显示编辑器</button>
-            <button class="layui-btn" @click="setHeight()">设置编辑器高度为500</button>
-            <button class="layui-btn" @mousedown="isFocus()">编辑器是否获得焦点</button>
-            <button class="layui-btn" @mousedown="setBlur()">编辑器失去焦点</button>
-            <button class="layui-btn" @click="getLocalData()">获取草稿箱内容</button>
-            <button class="layui-btn" @click="clearLocalData()">清空草稿箱</button>
+            <button class="layui-btn" @click="updateContent()">保存英文</button>
+            <button class="layui-btn" @click="updateCnContent()">保存中文</button>
         </div>
-
         <Editor ref="editor" @ready="ueditorReady"></Editor>
     </Card>
 </template>
 
 <script>
+    import Contact from '@/http/contact.js';
     export default {
         data() {
             return {
@@ -81,6 +63,24 @@
 
             getContentTxt() {
                 this.$layer.alert(this.instance.getContentTxt());
+            },
+
+            updateContent() {
+                Contact.updateContact(this, 1, this.instance.getContent()).then(res => {
+                    if (res.success) {
+                        this.$layer.msg('修改成功');
+                        this.$router.push('/contact');
+                    }
+                });
+            },
+
+            updateCnContent() {
+                Contact.updateCnContact(this, 1, this.instance.getContent()).then(res => {
+                    if (res.success) {
+                        this.$layer.msg('修改成功');
+                        this.$router.push('/contact');
+                    }
+                });
             },
 
             hasContent() {

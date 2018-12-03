@@ -10,7 +10,6 @@
             </div>
 
             <div mref="bar">
-                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
             </div>
         </Table>
@@ -18,11 +17,12 @@
 </template>
 
 <script>
+    import FeedBack from '@/http/feedback.js';
     export default {
         data() {
             return {
                 options: {
-                    url: '/static/data/demo1.json',
+                    url: 'http://127.0.0.1:8989/cms/feedback/getAllFeedBacks?tokenAuthorization=' + localStorage.token,
                     cols: [[
 
                         {
@@ -32,33 +32,32 @@
                         },
 
                         {
-                            field: 'username',
-                            title: '标题',
-                            edit: 'text'
+                            field: 'title',
+                            title: '标题'
                         },
 
                         {
-                            field: 'city',
+                            field: 'contact',
                             title: '联系方式'
                         },
 
                         {
-                            field: 'sign',
+                            field: 'companyName',
                             title: '公司名'
                         },
 
                         {
-                            field: 'experience',
+                            field: 'content',
                             title: '内容'
                         },
 
                         {
-                            field: 'sign',
+                            field: 'area',
                             title: '地区'
                         },
 
                         {
-                            field: 'sign',
+                            field: 'address',
                             title: '地址'
                         },
 
@@ -95,9 +94,14 @@
                 if (obj.event === 'detail') {
                     this.$layer.msg('ID：' + data.id + ' 的查看操作');
                 } else if (obj.event === 'del') {
-                    this.$layer.confirm('真的删除行么', (index) => {
-                        obj.del();
-                        this.$layer.close(index);
+                    this.$layer.confirm('真的删除么', (index) => {
+                        FeedBack.deleteFeedback(this, data.id).then((res) => {
+                            if (res.success) {
+                                obj.del();
+                                this.$layer.msg('删除成功');
+                                this.$layer.close(index);
+                            }
+                        });
                     });
                 } else if (obj.event === 'edit') {
                     this.$layer.alert('编辑行：<br>' + JSON.stringify(data));
