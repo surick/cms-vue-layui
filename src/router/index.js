@@ -23,7 +23,7 @@ import ChildAdd from '@/pages/product/category/childAdd';
 
 import Feedback from '@/pages/feedback/feedback';
 
-import componentRouter from './component';
+// import componentRouter from './component';
 
 Vue.use(Router);
 
@@ -155,8 +155,7 @@ export const appRouter = [
         icon: 'layui-icon-dialogue',
         path: '/contact',
         component: Contact
-    },
-    componentRouter
+    }
 ];
 
 const mainRouter = {
