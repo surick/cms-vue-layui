@@ -150,5 +150,15 @@ export default {
             list.push(obj);
         });
         return list;
+    },
+    updatePassword(vm, obj) {
+        return ajax(vm, {
+            method: 'PUT',
+            url: '/sys/putPassword',
+            data: {
+                oldPassword: obj.oldPassword,
+                newPassword: obj.newPassword
+            }
+        });
     }
 };

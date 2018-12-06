@@ -49,7 +49,7 @@
                         <a lay-href="set/user/info">基本资料</a>
                     </dd>
                     <dd>
-                        <a lay-href="set/user/password">修改密码</a>
+                        <a @click="change()">修改密码</a>
                     </dd>
                     <hr>
                     <dd layadmin-event="logout" style="text-align: center;" @click="logout()">
@@ -74,6 +74,9 @@ export default {
             localStorage.clear();
             this.$cookie.set('CMS_TOKEN', '');
             this.$router.push('/login');
+        },
+        change() {
+            this.$router.push('/password');
         }
 
     }
