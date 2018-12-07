@@ -56,6 +56,7 @@
                             if (res.success) {
                                 let user = res.data;
                                 localStorage.token = user.token;
+                                localStorage.name = user.name;
                                 this.$cookie.set('CMS_TOKEN', user.token);
                                 // localStorage.user = user.name;
                                 this.$store.commit('updateUserInfo', {

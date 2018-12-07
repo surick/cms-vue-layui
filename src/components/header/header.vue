@@ -46,7 +46,7 @@
                 <span class="layui-nav-bar"></span>
                 <dl class="layui-nav-child layui-anim layui-anim-upbit">
                     <dd>
-                        <a lay-href="set/user/info">基本资料</a>
+                        <a @click="info()">基本资料</a>
                     </dd>
                     <dd>
                         <a @click="change()">修改密码</a>
@@ -77,6 +77,9 @@ export default {
         },
         change() {
             this.$router.push('/password');
+        },
+        info() {
+            this.$router.push('/info');
         }
 
     }

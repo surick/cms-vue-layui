@@ -80,6 +80,18 @@ export default {
             });
         });
     },
+    getUserByName(vm, name) {
+        return new Promise((resolve, reject) => {
+            ajax(vm, {
+                method: 'GET',
+                url: '/sys/user/getUserByName/' + name
+            }).then(res => {
+                if (res.success) {
+                    resolve(res);
+                }
+            });
+        });
+    },
     updateUser(vm, id, obj) {
         return ajax(vm, {
             method: 'PUT',

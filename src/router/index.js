@@ -5,6 +5,7 @@ import Home from '@/pages/home/home';
 import Login from '@/pages/login/login';
 import Error404 from '@/pages/error/404';
 import UpdatePassword from '@/pages/user/password';
+import Info from '@/pages/user/info';
 
 import About from '@/pages/about/about';
 import Profile from '@/pages/about/profile/profile';
@@ -41,6 +42,13 @@ export const otherRouter = [
         title: '修改密码',
         path: '/password',
         component: UpdatePassword
+    },
+
+    {
+        name: 'info',
+        title: '个人中心',
+        path: '/info',
+        component: Info
     },
 
     {
