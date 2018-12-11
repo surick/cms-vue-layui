@@ -1,5 +1,5 @@
 <template>
-    <Card title="公司荣誉" icon="layui-icon-fonts-code" @icon-click="showDoc('富文本', 'editor')">
+    <Card title="公司荣誉">
         <div class="layui-btn-container">
             <button class="layui-btn" @click="updateHonors()">保存英文</button>
             <button class="layui-btn" @click="updateCnHonors">保存中文</button>

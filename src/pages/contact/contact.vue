@@ -1,5 +1,5 @@
 <template>
-    <Card title="联系我们" icon="layui-icon-fonts-code" @icon-click="showDoc('富文本', 'editor')">
+    <Card title="联系我们">
         <div class="layui-btn-container">
             <button class="layui-btn" @click="updateContent()">保存英文</button>
             <button class="layui-btn" @click="updateCnContent()">保存中文</button>

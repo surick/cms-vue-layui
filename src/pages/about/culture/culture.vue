@@ -1,5 +1,5 @@
 <template>
-    <Card title="公司文化" icon="layui-icon-fonts-code" @icon-click="showDoc('富文本', 'editor')">
+    <Card title="公司文化">
         <div class="layui-btn-container">
             <button class="layui-btn" @click="updateCulture()">保存英文</button>
             <button class="layui-btn" @click="updateCnCulture()">保存中文</button>
