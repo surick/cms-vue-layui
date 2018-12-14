@@ -2,4 +2,4 @@
 
 ## Backend Api
 
-- [CMS](https://github/surick/cms)
+- [CMS](https://github.com/surick/cms)
