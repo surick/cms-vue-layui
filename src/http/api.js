@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { router } from '@/router';
 
-const ajaxUrl = 'http://127.0.0.1:8989';
+const ajaxUrl = 'http://192.168.0.110:8989';
 
 const http = axios.create({
     baseURL: ajaxUrl,

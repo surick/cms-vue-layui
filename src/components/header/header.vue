@@ -7,25 +7,25 @@
                 </a>
                 <span class="layui-nav-bar"></span>
             </li>
-            <li class="layui-nav-item">
+            <!-- <li class="layui-nav-item">
                 <a href="javascript:;" title="刷新">
                     <i class="layui-icon layui-icon-refresh-3"></i>
                 </a>
                 <span class="layui-nav-bar"></span>
-            </li>
-            <li class="layui-nav-item layui-hide-xs">
+            </li> -->
+            <!-- <li class="layui-nav-item layui-hide-xs">
                 <input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" />
                 <span class="layui-nav-bar"></span>
-            </li>
+            </li> -->
         </ul>
         <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item">
+            <!-- <li class="layui-nav-item">
                 <a lay-href="app/message/">
                     <i class="layui-icon layui-icon-notice"></i>
                     <span class="layui-badge-dot"></span>
                 </a>
                 <span class="layui-nav-bar"></span>
-            </li>
+            </li> -->
             <li class="layui-nav-item">
                 <a href="javascript:;" @click="openDrawer()">
                     <i class="layui-icon layui-icon-theme"></i>

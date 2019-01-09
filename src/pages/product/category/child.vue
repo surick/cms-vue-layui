@@ -19,7 +19,7 @@
         data() {
             return {
                 options: {
-                    url: 'http://127.0.0.1:8989/cms/productType/getAllChildTypes?tokenAuthorization=' + localStorage.token,
+                    url: 'http://192.168.0.110:8989/cms/productType/getAllChildTypes?tokenAuthorization=' + localStorage.token,
                     cols: [[
 
                         {
@@ -41,7 +41,7 @@
                         },
 
                         {
-                            field: 'parentId',
+                            field: 'cnParentName',
                             title: '父类别',
                             edit: 'text',
                             sort: true

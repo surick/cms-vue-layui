@@ -29,7 +29,7 @@
 
         // 服务器统一请求接口路径
         //serverUrl: window.NEDITOR_UPLOAD || URL + "php/controller.php",
-        serverUrl: "http://127.0.0.1:8989/image/config?tokenAuthorization=" + localStorage.token,
+        serverUrl: "http://192.168.0.110:8989/image/config?tokenAuthorization=" + localStorage.token,
         imageActionName: "uploadimage",
         scrawlActionName: "uploadscrawl",
         videoActionName: "uploadvideo",
